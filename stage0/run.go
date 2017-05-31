@@ -191,15 +191,15 @@ func MergeMounts(mounts []schema.Mount, appMounts []schema.Mount) []schema.Mount
 // MergePorts merges two port lists
 func MergePorts(a, b []types.Port) []types.Port {
 	m := make(map[types.ACName]types.Port)
-	for _,port := range a {
+	for _, port := range a {
 		m[port.Name] = port
 	}
-	for _,port := range b {
+	for _, port := range b {
 		m[port.Name] = port
 	}
 	res := make([]types.Port, len(m))
 	i := 0
-	for _,port := range m {
+	for _, port := range m {
 		res[i] = port
 		i++
 	}

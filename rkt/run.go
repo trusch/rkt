@@ -402,7 +402,6 @@ func runRun(cmd *cobra.Command, args []string) (exit int) {
 		return 254
 	}
 
-
 	if len(manifest.Apps) == 0 {
 		stderr.Print("pod must contain at least one application")
 		return 254
