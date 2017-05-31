@@ -111,7 +111,6 @@ func (ce CrossingEntrypoint) Run() error {
 // generateRuntimeApp merges runtime information from the image manifest and from
 // runtime configuration overrides, returning a full configuration for a runtime app
 func generateRuntimeApp(appRunConfig *apps.App, am *schema.ImageManifest, podMounts []schema.Mount) (schema.RuntimeApp, error) {
-
 	ra := schema.RuntimeApp{
 		App: am.App,
 		Image: schema.RuntimeImage{
@@ -122,6 +121,7 @@ func generateRuntimeApp(appRunConfig *apps.App, am *schema.ImageManifest, podMou
 		Mounts:         MergeMounts(podMounts, appRunConfig.Mounts),
 		ReadOnlyRootFS: appRunConfig.ReadOnlyRootFS,
 	}
+	ra.App.Ports = MergePorts(ra.App.Ports, appRunConfig.Ports)
 
 	appName, err := types.NewACName(appRunConfig.Name)
 	if err != nil {
