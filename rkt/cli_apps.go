@@ -905,6 +905,9 @@ func (ae *appExpose) Set(s string) error {
 	if err != nil {
 		return err
 	}
+	if port.Protocol == "" {
+		port.Protocol = "tcp"
+	}
 	app := (*apps.Apps)(ae).Last()
 	if app == nil {
 		return fmt.Errorf("--expose must follow an application")
