@@ -121,7 +121,9 @@ func generateRuntimeApp(appRunConfig *apps.App, am *schema.ImageManifest, podMou
 		Mounts:         MergeMounts(podMounts, appRunConfig.Mounts),
 		ReadOnlyRootFS: appRunConfig.ReadOnlyRootFS,
 	}
-	ra.App.Ports = MergePorts(ra.App.Ports, appRunConfig.Ports)
+	if ra.App != nil && appRunConfig != nil {
+		ra.App.Ports = MergePorts(ra.App.Ports, appRunConfig.Ports)
+	}
 
 	appName, err := types.NewACName(appRunConfig.Name)
 	if err != nil {
